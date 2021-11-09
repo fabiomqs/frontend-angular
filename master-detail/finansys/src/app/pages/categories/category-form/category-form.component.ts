@@ -43,6 +43,50 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
         this.setPageTitle();
     }
 
+    submitForm():void {
+        this.submittingForm = true;
+        if(this.currentAction == "new")
+            this.createCategory();
+        else 
+            this.updateCategory();
+    }
+
+    private createCategory():void {
+        const category: Category = 
+            Object.assign(new Category(), this.categoryForm.value);
+        
+        this.categoryService.create(category)
+            .subscribe(
+                category => this.actionsForSuccess(category),
+                err => this.actionsForError(err)
+            )
+    }
+
+    private actionsForSuccess(category: Category): void {
+        let message = "Categoria " + category.name + " ";
+        if(this.currentAction == "new")
+            message +=  "criada com sucesso!"
+        else 
+            message +=  "atualizada com sucesso!"
+        toastr.success(message);
+
+        this.router.navigateByUrl("categories", {skipLocationChange: true})
+            .then(
+                () => this.router.navigate(["categories", category.id, "edit"])
+            )
+    }
+    
+    private updateCategory():void {
+        const category: Category = 
+            Object.assign(new Category(), this.categoryForm.value);
+        
+        this.categoryService.update(category)
+            .subscribe(
+                category => this.actionsForSuccess(category),
+                err => this.actionsForError(err)
+            )
+    }
+
     private setCurrentAction():void {
         if(this.route.snapshot.url[0].path == "new")
             this.currentAction = "new"
@@ -53,7 +97,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     private buildCategoryForm():void {
         this.categoryForm = this.formBuilder.group({
             id: [null],
-            name: [null, Validators.required, Validators.minLength(2)],
+            name: [null, [Validators.required, Validators.minLength(2)]],
             description: [null]
         });
     }
@@ -67,15 +111,12 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
                     this.category = category;
                     this.categoryForm.patchValue(this.category);
                 },
-                err => {
-                    toastr.error("Ocorreu um erro no servidor, tente mais tarde");
-                    console.log(err);
-                }
+                err => this.actionsForError(err)
             )
             
         }
     }
-    
+
 
     private setPageTitle():void {
         if(this.currentAction == "new")
@@ -84,6 +125,16 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
             const categoryName = this.category.name || "";
             this.pageTitle = "Editando Categoria: " + categoryName;
         }
+    }
+
+    private actionsForError(err): void {
+        toastr.error("Ocorreu um erro no servidor, tente mais tarde");
+        console.log(err);
+        this.submittingForm = false;
+        if(err.status === 422)
+            this.serverErrorMessages = JSON.parse(err._body).errors;
+        else 
+            this.serverErrorMessages = ["Erro no servidor, tente mais tarde."]
     }
 
 }
