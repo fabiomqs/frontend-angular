@@ -23,7 +23,6 @@ export class CategoryListComponent implements OnInit {
         this.categoryService.getAll()
                 .subscribe(
                     categories => {
-                        console.log(categories)
                         this.categories = categories
                     },
                     err => console.log(err)
