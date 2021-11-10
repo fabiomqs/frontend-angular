@@ -20,7 +20,6 @@ export class EntryService {
     getAll():Observable<Entry[]> {
         return this.http
             .get<Entry[]>(this.apiPath);
-            
     }
 
     getById(id:number):Observable<Entry> {
