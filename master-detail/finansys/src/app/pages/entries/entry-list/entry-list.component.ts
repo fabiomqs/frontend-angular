@@ -30,7 +30,8 @@ export class EntryListComponent implements OnInit {
                                 let newEntry = Object.assign(new Entry(), entry);
                                 this.entries.push(newEntry);
                             }
-                        )
+                        );
+                        this.entries = this.entries.sort((a,b) => b.id - a.id);
                     },
                     err => console.log(err)
                 );

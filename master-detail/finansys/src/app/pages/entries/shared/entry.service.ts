@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { map, catchError, flatMap } from 'rxjs/operators';
+import { map, catchError, mergeMap } from 'rxjs/operators';
 import { Entry } from './entry.model';
+import { CategoryService } from '../../categories/shared/category.service';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class EntryService {
     private apiPath: string = "api/entries";
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private categoryService: CategoryService
     ) { }
 
     getAll():Observable<Entry[]> {
@@ -29,17 +31,36 @@ export class EntryService {
     }
 
     create(entry: Entry):Observable<Entry> {
-        return this.http
-            .post<Entry>(this.apiPath, entry);
+        return this.categoryService.getById(entry.categoryId)
+            .pipe(
+                mergeMap(
+                    category => {
+                        entry.category = category;
+                        return this.http
+                            .post<Entry>(this.apiPath, entry);
+                    }
+                )
+            );
     }
 
     update(entry: Entry):Observable<Entry> {
         const url = `${this.apiPath}/${entry.id}`;
-        return this.http
-            .put<Entry>(url, entry)
+
+        return this.categoryService.getById(entry.categoryId)
             .pipe(
-                map(() => entry)
-            )
+                mergeMap(
+                    category => {
+                        entry.category = category;
+                        
+                        return this.http
+                            .put<Entry>(url, entry)
+                            .pipe(
+                                map(() => entry)
+                            );
+                    }
+                )
+            );
+
     }
 
     delete(id:number):Observable<any> {
