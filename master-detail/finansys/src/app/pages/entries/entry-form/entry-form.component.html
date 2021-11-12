@@ -34,17 +34,17 @@
 
                 <!-- type -->
                 <div class="form-group col-md-2">
-                    <label for="type">Tipo</label>
-                    <select name="type" id="type" formControlName="type" class="form-control">
-                        <option *ngFor="let option of typeOptions"
-                            [value]="option.value">
-                            {{ option.text }}
+                    <label for="typeId">Tipo</label>
+                    <select name="typeId" id="typeId" formControlName="typeId" class="form-control">
+                        <option *ngFor="let type of types"
+                            [value]="type.id">
+                            {{ type.name }}
                         </option>
                     </select>
 
                     <div class="text-danger" 
-                        *ngIf="entryForm.get('type').invalid && entryForm.get('type').touched">
-                        <div *ngIf="entryForm.get('type').errors.required">dado obrigatório</div>
+                        *ngIf="entryForm.get('typeId').invalid && entryForm.get('typeId').touched">
+                        <div *ngIf="entryForm.get('typeId').errors.required">dado obrigatório</div>
                     </div>
                 </div>
 

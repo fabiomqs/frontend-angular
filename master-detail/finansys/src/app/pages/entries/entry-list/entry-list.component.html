@@ -41,8 +41,8 @@
             </td>
             <td class="text-right">
                 <strong 
-                    [class.text-success]="entry.type == 'revenue'"
-                    [class.text-danger]="entry.type == 'expense'">
+                    [class.text-success]="entry.type.id == 2"
+                    [class.text-danger]="entry.type.id == 1">
                     {{entry.amount}}
                 </strong>
                 <br>

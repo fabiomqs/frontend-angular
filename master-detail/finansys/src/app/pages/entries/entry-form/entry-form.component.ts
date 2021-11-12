@@ -9,6 +9,8 @@ import { Category } from '../../categories/shared/category.model';
 import { CategoryService } from '../../categories/shared/category.service';
 import { Entry } from '../shared/entry.model';
 import { EntryService } from '../shared/entry.service';
+import { Type } from '../shared/type.model';
+import { TypeService } from '../shared/type.service';
 
 
 
@@ -27,6 +29,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     submittingForm: boolean = false;
     entry: Entry = new Entry();
     categories: Array<Category>;
+    types: Array<Type>
 
     imaskConfig = {
         mask: Number,
@@ -42,6 +45,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
         private router: Router,
         private entryService: EntryService,
         private categoryService: CategoryService,
+        private typeService: TypeService, 
         private formBuilder: FormBuilder,
         
     ) { }
@@ -54,6 +58,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
         this.buildEntryForm();
         this.loadEntry();
         this.loadCategories();
+        this.loadTypes();
 
     }
 
@@ -69,18 +74,6 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
             this.createEntry();
         else
             this.updateEntry();
-    }
-
-    get typeOptions(): Array<any> {
-        return Object.entries(Entry.types)
-            .map(
-                ([value, text]) => {
-                    return {
-                        text: text,
-                        value: value
-                    }
-                }
-            )
     }
 
     private createEntry(): void {
@@ -131,7 +124,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
             id: [null],
             name: [null, [Validators.required, Validators.minLength(2)]],
             description: [null],
-            type: ["expense", [Validators.required]],
+            typeId: [1, [Validators.required]],
             amount: [null, [Validators.required]],
             date: [null, [Validators.required]],
             paid: [true, [Validators.required]],
@@ -159,6 +152,13 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
             .subscribe(
                 categories => this.categories = categories
             );
+    }
+
+    private loadTypes() {
+        this.typeService.getAll()
+            .subscribe(
+                types => this.types = types
+            )
     }
 
 
