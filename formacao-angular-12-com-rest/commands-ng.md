@@ -1,0 +1,14 @@
+Formação Angular 13 - Integração com API Restful JavaSpring
+to run api:
+>	.\mvnw.cmd spring-boot:run
+
+>	ng new ponto-inteligente
+>	ng add @angular/material
+>	npm i @angular/flex-layout hammerjs
+
+>	ng serve 
+
+//module login
+>	ng g m autenticacao/login
+//component login
+>	ng g c autenticacao/login/components/login --skip-tests
