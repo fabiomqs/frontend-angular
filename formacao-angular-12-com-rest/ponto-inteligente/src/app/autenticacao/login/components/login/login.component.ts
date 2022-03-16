@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Login } from '../../models/login.model';
 
 @Component({
     selector: 'app-login',
@@ -35,7 +36,11 @@ export class LoginComponent implements OnInit {
                 "Dados inválidos", "Erro", { duration: 5000 });
             return;
         }
-        alert(JSON.stringify(this.form.value));
+        const login:Login = this.form.value;
+        this.snackBar.open(
+            `Email: ${login.email}, Senha: ${login.senha}`, "Logado", { duration: 5000 });
+            //JSON.stringify(login), "Logado", { duration: 5000 });
+        //alert(JSON.stringify(login));
     }
 
 }
