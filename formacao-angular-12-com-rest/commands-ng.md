@@ -26,3 +26,7 @@ to run api:
 >	ng g m autenticacao/cadastro-pf
 >	ng g c autenticacao/cadastro-pf/components/cadastrar-pf --skip-tests
 >	ng g s autenticacao/cadastro-pf/services/cadastrar-pf --skip-tests
+
+>	ng g m funcionario
+>	ng g c funcionario/components/listagem --skip-tests
+>	ng g c funcionario/components/lancamento --skip-tests
