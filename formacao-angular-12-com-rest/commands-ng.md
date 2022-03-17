@@ -30,3 +30,5 @@ to run api:
 >	ng g m funcionario
 >	ng g c funcionario/components/listagem --skip-tests
 >	ng g c funcionario/components/lancamento --skip-tests
+
+>	npm install moment --save
