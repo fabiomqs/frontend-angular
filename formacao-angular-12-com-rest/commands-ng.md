@@ -17,3 +17,5 @@ to run api:
 >	ng g class autenticacao/login/login-routing.module --skip-tests
 >	ng g class autenticacao/login/components/logar.component --skip-tests
 >	ng g s autenticacao/login/services/login --skip-tests
+>	ng g m autenticacao/cadastro-pj
+>	ng g c autenticacao/cadastro-pj/components/cadastrar-pj --skip-tests

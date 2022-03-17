@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginModule } from './autenticacao/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginRoutingModule } from './autenticacao/login/login-routing.module';
+import { CadastroPjModule } from './autenticacao/cadastro-pj/cadastro-pj.module';
+import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-routing.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,10 @@ import { LoginRoutingModule } from './autenticacao/login/login-routing.module';
         BrowserAnimationsModule,
         MatButtonModule,
         LoginModule,
+        CadastroPjModule,
+
         LoginRoutingModule,
+        CadastroPjRoutingModule,
 
         AppRoutingModule
     ],
