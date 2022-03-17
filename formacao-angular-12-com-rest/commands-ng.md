@@ -21,3 +21,4 @@ to run api:
 >	ng g c autenticacao/cadastro-pj/components/cadastrar-pj --skip-tests
 >	ng g m shared
 >	ng g directive shared/directives/mascara --selector mascara 
+>	ng g s autenticacao/cadastro-pj/services/cadastro-pj --skip-tests
