@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Login } from '../../models/login.model';
+import { LoginService } from '../../services/login.service';
 
 @Component({
     selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder, 
         private snackBar: MatSnackBar,
+        private loginService:LoginService,
         private router:Router
     ) { }
 
@@ -32,15 +34,64 @@ export class LoginComponent implements OnInit {
 
     logar() {
         if (this.form.invalid) {
-            this.snackBar.open(
-                "Dados inválidos", "Erro", { duration: 5000 });
             return;
         }
-        const login:Login = this.form.value;
-        this.snackBar.open(
-            `Email: ${login.email}, Senha: ${login.senha}`, "Logado", { duration: 5000 });
-            //JSON.stringify(login), "Logado", { duration: 5000 });
-        //alert(JSON.stringify(login));
+    
+        const login: Login = this.form.value;
+    //    this.loginService.logar(login)
+    //        .subscribe(
+    //            data => {
+    //                console.log(JSON.stringify(data));
+    //                localStorage['token'] = data['data']['token'];
+    //                const usuarioData = JSON.parse(
+    //                    atob(data['data']['token'].split('.')[1]));
+    //                console.log(JSON.stringify(usuarioData));
+    //                if (usuarioData['role'] == 'ROLE_ADMIN') {
+    //                    alert('Deve redirecionar para a página de admin');
+                        //this.router.navigate(['/admin']);
+    //                } else {
+    //                    alert('Deve redirecionar para a página de funcionário');
+                        //this.router.navigate(['/funcionario']);
+    //                }
+    //            },
+    //            err => {
+    //                console.log(JSON.stringify(err));
+    //                let msg: string = "Tente novamente em instantes.";
+    //                if (err['status'] == 401) {
+    //                    msg = "Email/senha inválido(s)."
+    //                }
+    //                this.snackBar.open(msg, "Erro", { duration: 5000 });
+    //            }
+    //        );
+
+            
+            this.loginService.logar(login)
+                .subscribe({
+                    next: (data) => {
+                        console.log(JSON.stringify(data));
+                        localStorage['token'] = data['data']['token'];
+                        const usuarioData = JSON.parse(
+                            atob(data['data']['token'].split('.')[1]));
+                        console.log(JSON.stringify(usuarioData));
+                        if (usuarioData['role'] == 'ROLE_ADMIN') {
+                            alert('Deve redirecionar para a página de admin');
+                            //this.router.navigate(['/admin']);
+                        } else {
+                            alert('Deve redirecionar para a página de funcionário');
+                            //this.router.navigate(['/funcionario']);
+                        }
+                    },
+                    error: (err) => {
+                        console.log(JSON.stringify(err));
+                        let msg: string = "Tente novamente em instantes.";
+                        if (err['status'] == 401) {
+                            msg = "Email/senha inválido(s)."
+                        }
+                        this.snackBar.open(msg, "Erro", { duration: 5000 });
+                    },
+                    complete: () => console.info('complete') 
+                });
+         
     }
 
 }
