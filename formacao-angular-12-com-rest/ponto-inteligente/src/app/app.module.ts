@@ -13,6 +13,7 @@ import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-
 import { CadastroPfModule } from './autenticacao/cadastro-pf/cadastro-pf.module';
 import { CadastroPfRoutingModule } from './autenticacao/cadastro-pf/cadastro-pf-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FuncionarioModule } from './funcionario/funcionario.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         LoginModule,
         CadastroPjModule,
         CadastroPfModule,
+        FuncionarioModule,
         MatToolbarModule,
         MatIconModule,
         FlexLayoutModule,
