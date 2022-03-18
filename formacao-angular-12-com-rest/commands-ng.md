@@ -34,3 +34,4 @@ to run api:
 >	npm install moment --save
 
 >	ng g s shared/services/http-util --skip-tests
+>	ng g s shared/services/lancamento --skip-tests
