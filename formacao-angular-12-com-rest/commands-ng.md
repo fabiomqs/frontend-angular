@@ -32,3 +32,5 @@ to run api:
 >	ng g c funcionario/components/lancamento --skip-tests
 
 >	npm install moment --save
+
+>	ng g s shared/services/http-util --skip-tests
