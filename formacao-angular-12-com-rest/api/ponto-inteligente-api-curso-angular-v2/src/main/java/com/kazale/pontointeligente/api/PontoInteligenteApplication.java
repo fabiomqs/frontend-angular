@@ -16,7 +16,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 @EnableCaching
@@ -67,26 +70,83 @@ public class PontoInteligenteApplication {
 			//funcionarioRepository.findAll().forEach(System.out::println);
 			funcionarioRepository.findByEmpresaId(empresa.getId()).forEach(System.out::println);
 
-			gerarLancamentos(funcionario, 20);
+			gerarLancamentos(funcionario, 120);
 		}
 	}
 
 	private void gerarLancamentos(Funcionario funcionario, int numLancamentos) {
-		int tipoPos = 0;
-		TipoEnum[] tipos = TipoEnum.values();
 
-		Lancamento lancamento;
-		for (int i=0; i<numLancamentos; i++) {
-			lancamento = new Lancamento();
-			lancamento.setData(new Date());
-			lancamento.setTipo(tipos[tipoPos++]);
-			lancamento.setLocalizacao("53.4546692,-2.2221622");
-			lancamento.setFuncionario(funcionario);
-			lancamentoRepository.save(lancamento);
-			if (tipoPos == tipos.length) {
-				tipoPos = 0;
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -(numLancamentos));
+
+		for (int i=1; i<=numLancamentos; i++) {
+			Date data = calendar.getTime();
+			List<Lancamento> lancamentos = gerarLancamentosDia(funcionario, data);
+
+			for(Lancamento lancamento: lancamentos) {
+				lancamentoRepository.save(lancamento);
 			}
+
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
 		}
+//		int tipoPos = 0;
+//		TipoEnum[] tipos = TipoEnum.values();
+//
+//		Lancamento lancamento;
+//		for (int i=0; i<numLancamentos; i++) {
+//			lancamento = new Lancamento();
+//			lancamento.setData(new Date());
+//			lancamento.setTipo(tipos[tipoPos++]);
+//			lancamento.setLocalizacao("53.4546692,-2.2221622");
+//			lancamento.setFuncionario(funcionario);
+//			lancamentoRepository.save(lancamento);
+//			if (tipoPos == tipos.length) {
+//				tipoPos = 0;
+//			}
+//		}
+	}
+
+	private List<Lancamento> gerarLancamentosDia(Funcionario funcionario,Date data) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(data);
+		calendar.set(Calendar.HOUR_OF_DAY, 8);
+		Date dataInicio = calendar.getTime();
+		calendar.set(Calendar.HOUR_OF_DAY, 12);
+		Date dataIniAlmoco = calendar.getTime();
+		calendar.set(Calendar.HOUR_OF_DAY, 13);
+		Date dataFimAlmoco = calendar.getTime();
+		calendar.set(Calendar.HOUR_OF_DAY, 17);
+		Date dataFim = calendar.getTime();
+		List<Lancamento> lancamentos = new ArrayList<>();
+		Lancamento lancamentoInicio = new Lancamento();
+		lancamentoInicio.setData(dataInicio);
+		lancamentoInicio.setTipo(TipoEnum.INICIO_TRABALHO);
+		lancamentoInicio.setLocalizacao("53.4546692,-2.2221622");
+		lancamentoInicio.setFuncionario(funcionario);
+		lancamentos.add(lancamentoInicio);
+
+		Lancamento lancamentoIniAlmoco = new Lancamento();
+		lancamentoIniAlmoco.setData(dataIniAlmoco);
+		lancamentoIniAlmoco.setTipo(TipoEnum.INICIO_ALMOCO);
+		lancamentoIniAlmoco.setLocalizacao("53.4546692,-2.2221622");
+		lancamentoIniAlmoco.setFuncionario(funcionario);
+		lancamentos.add(lancamentoIniAlmoco);
+
+		Lancamento lancamentoFimAlmoco = new Lancamento();
+		lancamentoFimAlmoco.setData(dataFimAlmoco);
+		lancamentoFimAlmoco.setTipo(TipoEnum.TERMINO_ALMOCO);
+		lancamentoFimAlmoco.setLocalizacao("53.4546692,-2.2221622");
+		lancamentoFimAlmoco.setFuncionario(funcionario);
+		lancamentos.add(lancamentoFimAlmoco);
+
+		Lancamento lancamentoFim = new Lancamento();
+		lancamentoFim.setData(dataFim);
+		lancamentoFim.setTipo(TipoEnum.TERMINO_TRABALHO);
+		lancamentoFim.setLocalizacao("53.4546692,-2.2221622");
+		lancamentoFim.setFuncionario(funcionario);
+		lancamentos.add(lancamentoFim);
+
+		return lancamentos;
 	}
 
 }
