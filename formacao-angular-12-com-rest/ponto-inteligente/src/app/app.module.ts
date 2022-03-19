@@ -16,6 +16,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FuncionarioModule } from './funcionario/funcionario.module';
 import { FuncionarioRoutingModule } from './funcionario/funcionario-routing.module';
 import { AdminModule } from './admin/admin.module';
+import { AdminRoutingModule } from './admin/admin-routing.module';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AdminModule } from './admin/admin.module';
         CadastroPjRoutingModule,
         CadastroPfRoutingModule,
         FuncionarioRoutingModule,
+        AdminRoutingModule,
 
         AppRoutingModule
     ],
