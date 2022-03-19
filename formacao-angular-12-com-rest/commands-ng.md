@@ -38,3 +38,8 @@ to run api:
 
 >	ng g pipe shared/pipes/tipo --skip-tests
 >	ng g pipe shared/pipes/data --skip-tests
+
+>	ng g m admin
+>	ng g c admin/components/listagem --skip-tests
+>	ng g c admin/components/cadastro --skip-tests
+>	ng g c admin/components/atualizacao --skip-tests

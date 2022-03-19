@@ -17,8 +17,8 @@ export class ListagemComponent implements OnInit {
     dataSource: MatTableDataSource<Lancamento>;
     colunas: string[] = ['data', 'tipo', 'localizacao'];
 
-    @ViewChild(MatSort) sort: MatSort;
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
     constructor(
         private lancamentoService: LancamentoService,
