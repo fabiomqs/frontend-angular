@@ -16,10 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 @EnableCaching
@@ -66,11 +63,31 @@ public class PontoInteligenteApplication {
 			funcionario.setEmpresa(empresa);
 			funcionarioRepository.save(funcionario);
 
+			Funcionario funcionario2 = new Funcionario();
+			funcionario2.setCpf("26771156893");
+			funcionario2.setEmail("funcionario2@empresa.com");
+			funcionario2.setNome("Funcionário 2");
+			funcionario2.setPerfil(PerfilEnum.ROLE_USUARIO);
+			funcionario2.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			funcionario2.setEmpresa(empresa);
+			funcionarioRepository.save(funcionario2);
+
+			Funcionario funcionario3 = new Funcionario();
+			funcionario3.setCpf("84785957670");
+			funcionario3.setEmail("funcionario3@empresa.com");
+			funcionario3.setNome("Funcionário 3");
+			funcionario3.setPerfil(PerfilEnum.ROLE_USUARIO);
+			funcionario3.setSenha(PasswordUtils.gerarBCrypt("123456"));
+			funcionario3.setEmpresa(empresa);
+			funcionarioRepository.save(funcionario3);
+
 			empresaRepository.findAll().forEach(System.out::println);
 			//funcionarioRepository.findAll().forEach(System.out::println);
 			funcionarioRepository.findByEmpresaId(empresa.getId()).forEach(System.out::println);
 
 			gerarLancamentos(funcionario, 120);
+			gerarLancamentos(funcionario2, 120);
+			gerarLancamentos(funcionario3, 120);
 		}
 	}
 
@@ -107,15 +124,25 @@ public class PontoInteligenteApplication {
 	}
 
 	private List<Lancamento> gerarLancamentosDia(Funcionario funcionario,Date data) {
+		Random random = new Random();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(data);
 		calendar.set(Calendar.HOUR_OF_DAY, 8);
+		calendar.set(Calendar.MINUTE, random.nextInt(16));
+		calendar.set(Calendar.SECOND, random.nextInt(60));
+		calendar.set(Calendar.HOUR_OF_DAY, 8);
 		Date dataInicio = calendar.getTime();
 		calendar.set(Calendar.HOUR_OF_DAY, 12);
+		calendar.set(Calendar.MINUTE, random.nextInt(16));
+		calendar.set(Calendar.SECOND, random.nextInt(60));
 		Date dataIniAlmoco = calendar.getTime();
 		calendar.set(Calendar.HOUR_OF_DAY, 13);
+		calendar.set(Calendar.MINUTE, random.nextInt(16));
+		calendar.set(Calendar.SECOND, random.nextInt(60));
 		Date dataFimAlmoco = calendar.getTime();
 		calendar.set(Calendar.HOUR_OF_DAY, 17);
+		calendar.set(Calendar.MINUTE, random.nextInt(16));
+		calendar.set(Calendar.SECOND, random.nextInt(60));
 		Date dataFim = calendar.getTime();
 		List<Lancamento> lancamentos = new ArrayList<>();
 		Lancamento lancamentoInicio = new Lancamento();
