@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Lancamento } from 'src/app/shared/models/lancamento.model';
+import { FuncionarioService } from 'src/app/shared/services/funcionario.service';
 import { HttpUtilService } from 'src/app/shared/services/http-util.service';
 import { LancamentoService } from 'src/app/shared/services/lancamento.service';
 
@@ -26,6 +27,7 @@ export class ListagemComponent implements OnInit {
 
     constructor(
         private lancamentoService: LancamentoService,
+        private funcionarioService: FuncionarioService,
         private httpUtil: HttpUtilService,
         private snackBar: MatSnackBar,
         private formBuilder: FormBuilder) { }

@@ -27,43 +27,45 @@ import { LancamentoService } from '../shared/services/lancamento.service';
 import { HttpUtilService } from '../shared/services/http-util.service';
 import { PtBrMatPaginatorIntl } from '../shared/pt-br-mat-paginator-intl';
 import { AdminComponent } from './components/admin.component';
+import { FuncionarioService } from '../shared/services/funcionario.service';
 
 
 @NgModule({
     imports: [
-      CommonModule,
-      RouterModule,
-      FlexLayoutModule,
-      ReactiveFormsModule, 
-      FormsModule,
-      MatInputModule,
-      MatButtonModule,
-      MatListModule,
-      MatTooltipModule,
-      MatIconModule,
-      MatSnackBarModule,
-      MatTableModule,
-      MatSelectModule,
-      MatRadioModule,
-      MatDatepickerModule, 
-      MatNativeDateModule,
-      MatDialogModule,
-      MatPaginatorModule,
-      MatSortModule,
-      SharedModule
+        CommonModule,
+        RouterModule,
+        FlexLayoutModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatListModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatDialogModule,
+        MatPaginatorModule,
+        MatSortModule,
+        SharedModule
     ],
     declarations: [
-        ListagemComponent, 
-        CadastroComponent, 
+        ListagemComponent,
+        CadastroComponent,
         AtualizacaoComponent,
-      AdminComponent
+        AdminComponent
     ],
     providers: [
-      LancamentoService,
-      HttpUtilService,
-      MatPaginatorIntl,
-      { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-      { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
+        LancamentoService,
+        HttpUtilService,
+        FuncionarioService,
+        MatPaginatorIntl,
+        { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+        { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
     ],
-  })
+})
 export class AdminModule { }
