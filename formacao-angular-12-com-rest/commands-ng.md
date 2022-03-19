@@ -43,3 +43,5 @@ to run api:
 >	ng g c admin/components/listagem --skip-tests
 >	ng g c admin/components/cadastro --skip-tests
 >	ng g c admin/components/atualizacao --skip-tests
+
+>	ng g s shared/services/funcionario --skip-tests

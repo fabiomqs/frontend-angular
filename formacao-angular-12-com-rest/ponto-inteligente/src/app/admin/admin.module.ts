@@ -19,7 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { ListagemComponent } from './components/listagem/listagem.component';
+import { ConfirmarDialog, ListagemComponent } from './components/listagem/listagem.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { AtualizacaoComponent } from './components/atualizacao/atualizacao.component';
 import { SharedModule } from '../shared/shared.module';
@@ -57,7 +57,8 @@ import { FuncionarioService } from '../shared/services/funcionario.service';
         ListagemComponent,
         CadastroComponent,
         AtualizacaoComponent,
-        AdminComponent
+        AdminComponent,
+        ConfirmarDialog
     ],
     providers: [
         LancamentoService,
@@ -66,6 +67,10 @@ import { FuncionarioService } from '../shared/services/funcionario.service';
         MatPaginatorIntl,
         { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
         { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
-    ],
+    ]//,
+    //entryComponents no longer required
+    //entryComponents: [
+    //    ConfirmarDialog
+    //]
 })
 export class AdminModule { }
