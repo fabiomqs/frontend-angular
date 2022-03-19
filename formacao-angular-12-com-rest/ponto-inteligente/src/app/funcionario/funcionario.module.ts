@@ -20,6 +20,7 @@ import { FuncionarioComponent } from './components/funcionario.component';
 import { HttpUtilService } from '../shared/services/http-util.service';
 import { LancamentoService } from '../shared/services/lancamento.service';
 import { PtBrMatPaginatorIntl } from '../shared/pt-br-mat-paginator-intl';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PtBrMatPaginatorIntl } from '../shared/pt-br-mat-paginator-intl';
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        MatCardModule
+        MatCardModule,
+        SharedModule
     ],
     providers: [
         HttpUtilService,
