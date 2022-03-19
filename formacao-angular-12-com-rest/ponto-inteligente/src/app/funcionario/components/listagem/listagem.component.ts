@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Lancamento } from 'src/app/shared/models/lancamento.model';
@@ -15,6 +17,9 @@ export class ListagemComponent implements OnInit {
     dataSource: MatTableDataSource<Lancamento>;
     colunas: string[] = ['data', 'tipo', 'localizacao'];
 
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
     constructor(
         private lancamentoService: LancamentoService,
         private snackBar: MatSnackBar
@@ -26,6 +31,8 @@ export class ListagemComponent implements OnInit {
                 next: (data) => {
                     const lancamentos = data['data'] as Lancamento[];
                     this.dataSource = new MatTableDataSource<Lancamento>(lancamentos);
+                    this.dataSource.sort = this.sort;
+                    this.dataSource.paginator = this.paginator;
                 },
                 error: (err) => {
                     const msg: string = "Erro obtendo lançamentos.";
