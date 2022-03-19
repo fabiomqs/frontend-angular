@@ -10,7 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 
@@ -19,6 +19,7 @@ import { LancamentoComponent } from './components/lancamento/lancamento.componen
 import { FuncionarioComponent } from './components/funcionario.component';
 import { HttpUtilService } from '../shared/services/http-util.service';
 import { LancamentoService } from '../shared/services/lancamento.service';
+import { PtBrMatPaginatorIntl } from '../shared/pt-br-mat-paginator-intl';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { LancamentoService } from '../shared/services/lancamento.service';
     ],
     providers: [
         HttpUtilService,
-        LancamentoService
+        LancamentoService,
+        { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
     ]
 })
 export class FuncionarioModule { }
