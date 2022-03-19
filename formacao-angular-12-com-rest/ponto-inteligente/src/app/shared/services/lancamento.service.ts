@@ -9,6 +9,7 @@ import { Lancamento } from '../models/lancamento.model';
 
 @Injectable()
 export class LancamentoService {
+
     private readonly PATH: string = 'lancamentos';
     private readonly PATH_ULTIMO_LANC = '/funcionario/{funcionarioId}/ultimo';
     private readonly PATH_LANCAMENTOS = '/funcionario/{funcionarioId}';
@@ -43,6 +44,18 @@ export class LancamentoService {
                 '{funcionarioId}', this.httpUtil.obterIdUsuario()),
             this.httpUtil.headers()
         );
+    }
+
+    listarLancamentosPorFuncionario(funcionarioId: string, pagina: number,
+        ordem: string, direcao: string): Observable<any> {
+
+        const url: string = env.baseApiUrl + this.PATH +
+            this.PATH_LANCAMENTOS.replace('{funcionarioId}', funcionarioId);
+
+        const params: string = '?pag=' + pagina +
+            '&ord=' + ordem + '&dir=' + direcao;
+
+        return this.http.get(url + params, this.httpUtil.headers());
     }
 
 }
