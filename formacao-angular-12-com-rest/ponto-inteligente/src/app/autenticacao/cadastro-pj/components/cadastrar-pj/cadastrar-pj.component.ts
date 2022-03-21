@@ -17,7 +17,7 @@ export class CadastrarPjComponent implements OnInit {
     form: FormGroup;
 
     constructor(
-        private fb: FormBuilder, 
+        private formBuilder: FormBuilder, 
   	    private snackBar: MatSnackBar,
           private cadastroPjService: CadastroPjService,
         private router: Router
@@ -28,7 +28,7 @@ export class CadastrarPjComponent implements OnInit {
     }
 
     gerarForm() {
-        this.form = this.fb.group({
+        this.form = this.formBuilder.group({
             nome: ['', [Validators.required, Validators.minLength(3)]],
             email: ['', [Validators.required, Validators.email]],
             senha: ['', [Validators.required, Validators.minLength(6)]],
