@@ -41,7 +41,7 @@ import com.kazale.pontointeligente.api.services.LancamentoService;
 
 @RestController
 @RequestMapping("/api/lancamentos")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class LancamentoController {
 
 	private static final Logger log = LoggerFactory.getLogger(LancamentoController.class);

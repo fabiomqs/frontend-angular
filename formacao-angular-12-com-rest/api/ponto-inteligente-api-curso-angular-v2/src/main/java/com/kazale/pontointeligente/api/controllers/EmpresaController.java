@@ -19,7 +19,7 @@ import com.kazale.pontointeligente.api.services.EmpresaService;
 
 @RestController
 @RequestMapping("/api/empresas")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class EmpresaController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmpresaController.class);

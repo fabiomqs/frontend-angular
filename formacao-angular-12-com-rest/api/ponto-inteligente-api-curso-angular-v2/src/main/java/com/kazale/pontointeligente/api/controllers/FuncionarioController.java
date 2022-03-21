@@ -24,7 +24,7 @@ import com.kazale.pontointeligente.api.utils.PasswordUtils;
 
 @RestController
 @RequestMapping("/api/funcionarios")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class FuncionarioController {
 
 	private static final Logger log = LoggerFactory.getLogger(FuncionarioController.class);

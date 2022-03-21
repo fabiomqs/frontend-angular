@@ -27,7 +27,7 @@ import com.kazale.pontointeligente.api.utils.PasswordUtils;
 
 @RestController
 @RequestMapping("/api/cadastrar-pj")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class CadastroPJController {
 
 	private static final Logger log = LoggerFactory.getLogger(CadastroPJController.class);
