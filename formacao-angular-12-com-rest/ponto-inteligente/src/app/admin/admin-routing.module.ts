@@ -5,11 +5,13 @@ import { AdminComponent } from './components/admin.component';
 import { AtualizacaoComponent } from './components/atualizacao/atualizacao.component';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { ListagemComponent } from './components/listagem/listagem.component';
+import { AdminGuard } from './services/admin.guard';
 
 export const AdminRoutes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [ AdminGuard ],
         children: [
             {
                 path: '',

@@ -45,3 +45,5 @@ to run api:
 >	ng g c admin/components/atualizacao --skip-tests
 
 >	ng g s shared/services/funcionario --skip-tests
+
+>	ng g guard admin/services/admin --skip-tests

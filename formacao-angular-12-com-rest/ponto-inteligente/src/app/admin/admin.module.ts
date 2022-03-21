@@ -28,6 +28,7 @@ import { HttpUtilService } from '../shared/services/http-util.service';
 import { PtBrMatPaginatorIntl } from '../shared/pt-br-mat-paginator-intl';
 import { AdminComponent } from './components/admin.component';
 import { FuncionarioService } from '../shared/services/funcionario.service';
+import { AdminGuard } from './services/admin.guard';
 
 
 @NgModule({
@@ -66,8 +67,11 @@ import { FuncionarioService } from '../shared/services/funcionario.service';
         FuncionarioService,
         MatPaginatorIntl,
         { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
-        { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
-    ]//,
+        { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl },
+        AdminGuard
+    ]
+    
+    //,
     //entryComponents no longer required
     //entryComponents: [
     //    ConfirmarDialog
